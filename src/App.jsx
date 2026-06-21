@@ -1,14 +1,37 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import Body from "./components/Body";
+import Login from './pages/Login';
+import Profile from "./pages/Profile";
+
 
 function App() {
 
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Body />,
+      children: [
+        {
+          path: "/login",
+          element: <Login />
+        },
+        {
+          path: "/profile",
+          element: <Profile />
+        }
+      ]
+    }
+  ])
+
   return (
     <div>
-      <h1 className='text-red-600 m-2 p-2'>Hello World</h1>
-
-      <button className="btn">Default</button>
+      <RouterProvider router={appRouter}>
+        <Body />
+      </RouterProvider >
     </div>
+
   )
 }
 
-export default App
+export default App;
