@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import stat from "daisyui/components/stat";
 
 const userSlice = createSlice({
     name: "user",
