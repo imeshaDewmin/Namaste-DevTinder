@@ -14,6 +14,7 @@ const LoginForm = () => {
 
     const [email, setEmail] = useState("imesha123@gmail.com");
     const [password, setPassword] = useState("Imesha@123");
+    const [error, setError] = useState(null);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -36,7 +37,7 @@ const LoginForm = () => {
             dispatch(addLoginUser(res.data))
             navigate("/");
         } catch (error) {
-            console.error(error.message);
+            setError(error?.response?.data);
         }
     }
 
@@ -95,9 +96,9 @@ const LoginForm = () => {
                             </label>
                         </div>
 
-
                     </div>
-                    <div className="card-actions justify-center">
+                    <p className="text-red-500 mt-2 p-2">{error}</p>
+                    <div className="card-actions justify-center mt-2">
                         <button className="btn btn-primary"
                             onClick={handleLogin}>Login</button>
                     </div>
