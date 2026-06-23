@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { API_BASE_URL, USER_ICON } from "../utils/constants";
 import { removeLoggedInUser } from "../redux/userSlice";
+import { clearFeed } from "../redux/feedSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -21,6 +22,7 @@ const Navbar = () => {
             console.error(error.message);
         }
         dispatch(removeLoggedInUser());
+        dispatch(clearFeed());
         navigate("/login");
     }
 
@@ -46,7 +48,6 @@ const Navbar = () => {
                             <li>
                                 <Link to="/profile" className="justify-between">
                                     Profile
-                                    <span className="badge">New</span>
                                 </Link>
                             </li>
                             <li><a>Settings</a></li>
