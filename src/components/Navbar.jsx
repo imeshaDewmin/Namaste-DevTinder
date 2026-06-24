@@ -56,6 +56,12 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link to="/"
+                                    onClick={() => document.activeElement.blur()}>
+                                    Feed
+                                </Link>
+                            </li>
+                            <li>
                                 <Link to="/connections"
                                     onClick={() => document.activeElement.blur()}>
                                     Connections

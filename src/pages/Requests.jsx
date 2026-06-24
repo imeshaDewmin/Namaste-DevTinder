@@ -6,6 +6,7 @@ import { API_BASE_URL } from "../utils/constants";
 import ConnectionCard from "../components/ConnectionCard";
 
 const Requests = () => {
+
     const requests = useSelector(store => store.requests);
 
     const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const Requests = () => {
                         <ConnectionCard
                             key={c._id}
                             data={user}
+                            requestId={c._id}
                         />
                     )
                 })}

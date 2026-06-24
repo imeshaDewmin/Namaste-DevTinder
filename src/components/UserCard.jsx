@@ -1,6 +1,25 @@
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { API_BASE_URL } from "../utils/constants";
+import { removeConnectionFromFeed } from "../redux/feedSlice";
+
 const UserCard = ({ data }) => {
 
-    const { firstName, lastName, photoUrl, about, skills, age, gender } = data
+    const { _id, firstName, lastName, photoUrl, about, skills, age, gender } = data;
+
+    const dispatch = useDispatch();
+
+    const addConnection = async (status) => {
+        try {
+            const res = await axios.post(API_BASE_URL + `/request/send/${status}/${_id}`, {}, {
+                withCredentials: true
+            })
+            dispatch(removeConnectionFromFeed(_id));
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
     return (
         <div className="card bg-base-100 w-96 shadow-sm mt-3 m-2 p-2 col-span-4 ">
             <figure>
@@ -16,8 +35,8 @@ const UserCard = ({ data }) => {
                     <p>{age + "," + gender}</p>
                 )}
                 <div className="card-actions justify-center gap-2">
-                    <button className="btn btn-error">Ignore</button>
-                    <button className="btn btn-primary">Interested</button>
+                    <button className="btn btn-error" onClick={() => addConnection("ignored")}>Ignore</button>
+                    <button className="btn btn-primary" onClick={() => addConnection("interested")}>Interested</button>
                 </div>
             </div>
         </div>
