@@ -42,7 +42,7 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="flex justify-center mt-25">
+        <div className="flex justify-center items-center h-full py-10">
             <div className="card card-border border-black bg-base-100 w-96">
                 <div className="card-body">
                     <h2 className="card-title justify-center text-2xl font-bold">Login</h2>

@@ -6,7 +6,8 @@ import Profile from "./pages/Profile";
 import Feed from './pages/Feed';
 import { Provider } from 'react-redux';
 import appStore from './redux/appStore';
-
+import Connections from "./pages/Connections";
+import Requests from './pages/Requests';
 
 function App() {
 
@@ -26,6 +27,14 @@ function App() {
         {
           path: "/profile",
           element: <Profile />
+        },
+        {
+          path: "/connections",
+          element: <Connections />
+        },
+        {
+          path: "/requests",
+          element: <Requests />
         }
       ]
     }

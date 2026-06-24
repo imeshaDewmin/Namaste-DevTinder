@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_BASE_URL, USER_ICON } from "../utils/constants";
 import { removeLoggedInUser } from "../redux/userSlice";
 import { clearFeed } from "../redux/feedSlice";
+import { removeConnections } from "../redux/connectionSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { removeRequests } from "../redux/requestsSlice";
 
 const Navbar = () => {
 
@@ -23,6 +25,8 @@ const Navbar = () => {
         }
         dispatch(removeLoggedInUser());
         dispatch(clearFeed());
+        dispatch(removeConnections());
+        dispatch(removeRequests());
         navigate("/login");
     }
 
@@ -46,11 +50,23 @@ const Navbar = () => {
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li>
-                                <Link to="/profile" className="justify-between">
+                                <Link to="/profile" className="justify-between"
+                                    onClick={() => document.activeElement.blur()}>
                                     Profile
                                 </Link>
                             </li>
-                            <li><a>Settings</a></li>
+                            <li>
+                                <Link to="/connections"
+                                    onClick={() => document.activeElement.blur()}>
+                                    Connections
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/requests"
+                                    onClick={() => document.activeElement.blur()}>
+                                    Requests
+                                </Link>
+                            </li>
                             <li onClick={handleLogOut}><a>Logout</a></li>
                         </ul>
                     </div>

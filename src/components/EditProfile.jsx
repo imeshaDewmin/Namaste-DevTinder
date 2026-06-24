@@ -87,14 +87,17 @@ const EditProfile = ({ userData }) => {
 
                             <div className="mt-4">
                                 <legend className="fieldset-legend">Gender</legend>
-                                <label className="input validator ">
-                                    <input
-                                        type="text"
-                                        required
-                                        value={gender}
-                                        onChange={(e) => setGender(e.target.value)}
-                                    />
-                                </label>
+                                <details className="dropdown">
+                                    <summary className="btn m-1">
+                                        {gender || "Select Gender"}
+                                    </summary>
+
+                                    <ul className="menu dropdown-content bg-base-100 rounded-box z-10 w-52 p-2 shadow">
+                                        <li><a onClick={() => setGender("male")}>Male</a></li>
+                                        <li><a onClick={() => setGender("female")}>Female</a></li>
+                                        <li><a onClick={() => setGender("other")}>Other</a></li>
+                                    </ul>
+                                </details>
                             </div>
 
                             <div className="mt-4">
