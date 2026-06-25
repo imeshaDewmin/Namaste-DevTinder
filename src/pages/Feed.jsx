@@ -29,13 +29,10 @@ const Feed = () => {
         getFeed();
     }, []);
 
-
+    if (feedData.length === 0) return <h1 className="flex justify-center font-bold text-4xl">No new users...</h1>
     return (
-        <div className="pb-20 mt-5 grid grid-cols-12 justify-center col-span-12 gap-3">
-            {feedData.map((user) =>
-                <UserCard
-                    key={user._id}
-                    data={user} />)}
+        <div className="pb-20 mt-5 flex justify-center">
+            {feedData?.[0] && <UserCard data={feedData[0]} />}
         </div>
     )
 }

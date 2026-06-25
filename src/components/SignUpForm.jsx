@@ -6,12 +6,14 @@ import Feed from "../pages/Feed";
 import { useDispatch } from "react-redux";
 import { addLoginUser } from "../redux/userSlice";
 
-const LoginForm = () => {
+const SignUpForm = () => {
 
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -24,9 +26,11 @@ const LoginForm = () => {
         setPassword(e.target.value);
     }
 
-    const handleLogin = async () => {
+    const handleSignUp = async () => {
         try {
-            const res = await axios.post(API_BASE_URL + "/login", {
+            const res = await axios.post(API_BASE_URL + "/signup", {
+                firstName,
+                lastName,
                 emailId: email,
                 password
             },
@@ -34,8 +38,8 @@ const LoginForm = () => {
                     withCredentials: true
                 }
             );
-            dispatch(addLoginUser(res.data))
-            navigate("/");
+            dispatch(addLoginUser(res.data.data))
+            navigate("/profile");
         } catch (error) {
             setError(error?.response?.data);
         }
@@ -45,9 +49,58 @@ const LoginForm = () => {
         <div className="flex justify-center items-center h-full py-10">
             <div className="card card-border border-black bg-base-100 w-96">
                 <div className="card-body">
-                    <h2 className="card-title justify-center text-2xl font-bold">Login</h2>
+                    <h2 className="card-title justify-center text-2xl font-bold">Sign Up</h2>
                     <div>
-                        <div>
+                        <div className="mt-4">
+                            <legend className="fieldset-legend">First Name</legend>
+                            <label className="input validator ">
+                                <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g
+                                        strokeLinejoin="round"
+                                        strokeLinecap="round"
+                                        strokeWidth="2.5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </g>
+                                </svg>
+                                <input
+                                    type="text"
+                                    placeholder="First Name"
+                                    required
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+
+                                />
+                            </label>
+                        </div>
+                        <div className="mt-4">
+                            <legend className="fieldset-legend">Last Name</legend>
+                            <label className="input validator ">
+                                <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g
+                                        strokeLinejoin="round"
+                                        strokeLinecap="round"
+                                        strokeWidth="2.5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                    >
+                                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </g>
+                                </svg>
+                                <input
+                                    type="text"
+                                    placeholder="Last Name"
+                                    required
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <div className="mt-4">
                             <legend className="fieldset-legend"> Email Address</legend>
                             <label className="input validator">
                                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -100,13 +153,12 @@ const LoginForm = () => {
                     <p className="text-red-500 mt-2 p-2">{error}</p>
                     <div className="card-actions justify-center mt-2">
                         <button className="btn btn-primary"
-                            onClick={handleLogin}>Login</button>
+                            onClick={handleSignUp}>SignUp</button>
                     </div>
-
                     <p className="text-center mt-2 p-2 m-2">
-                        Don't have an account?
-                        <Link to="/signup" className="font-bold text-blue-800">
-                            SignUp
+                        Already have an account? 
+                        <Link to="/login" className="font-bold text-blue-800">
+                            Login
                         </Link>
                     </p>
                 </div>
@@ -114,4 +166,4 @@ const LoginForm = () => {
         </div>
     )
 }
-export default LoginForm;
+export default SignUpForm;

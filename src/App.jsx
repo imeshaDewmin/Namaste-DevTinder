@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import appStore from './redux/appStore';
 import Connections from "./pages/Connections";
 import Requests from './pages/Requests';
+import SignUp from './pages/SignUp';
 
 function App() {
 
@@ -16,6 +17,10 @@ function App() {
       path: "/",
       element: <Body />,
       children: [
+        {
+          path: "/signup",
+          element: <SignUp />
+        },
         {
           path: "/login",
           element: <Login />
